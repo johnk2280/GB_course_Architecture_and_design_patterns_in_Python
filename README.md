@@ -1,0 +1,1 @@
+# GB_course_Architecture_and_design_patterns_in_Python
