@@ -9,7 +9,7 @@ server_sock.bind(server_address)
 server_sock.listen(5)
 
 while True:
-    print('Сервер готов к работе')
+    print('Сервер готов к работе на адресе http://127.0.0.1:8002')
     client, address = server_sock.accept()
     print(f'Подключился {address}')
     data = client.recv(1024).decode()
