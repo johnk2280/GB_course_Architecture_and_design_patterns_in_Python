@@ -1,8 +1,13 @@
 from pprint import pprint
+from request import Request
 
 
-def application(environ, start_response) -> list:
+def application(environ: dict, start_response) -> list:
+    # print(environ['wsgi.input'].read().decode())
+    # pprint(environ)
+    request = Request(environ)
+    print(request.method)
+    print(request.path)
+    print(request.headers)
     start_response('200 OK', [('Content-Type', 'text/html')])
-    print(environ['wsgi.input'].read().decode())
-    pprint(environ)
     return [b'Hello world from my first wsgi application!!!']
