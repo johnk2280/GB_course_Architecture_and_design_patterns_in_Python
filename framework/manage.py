@@ -1,9 +1,8 @@
 import argparse
-import subprocess
-
 import os
+import signal
+import subprocess
 import sys
-from time import sleep
 
 METHODS = {
     'runserver': ['python3', 'server.py'],
@@ -32,7 +31,15 @@ def parse_commandline() -> None:
         if int(args.port) < 1024 or int(args.port) > 65535:
             raise ValueError
 
-        sp = subprocess.Popen(METHODS[args.method] + [args.port])
+        print(args)
+        cmd = METHODS[args.method] + [args.port]
+        # sp = subprocess.Popen(
+        #     cmd,
+        #     stdout=subprocess.PIPE,
+        #     shell=True,
+        #     preexec_fn=os.setsid,
+        # )
+        # os.killpg(os.getpgid(sp.pid), signal.SIGTERM)
     except KeyError:
         print('This method is not available.')
         sys.exit(-1)
@@ -42,10 +49,6 @@ def parse_commandline() -> None:
             'Port number must be in the range of numbers [1024 : 65535].'
         )
         sys.exit(-1)
-
-
-
-    return
 
 
 if __name__ == '__main__':
