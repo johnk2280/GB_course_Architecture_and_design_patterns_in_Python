@@ -17,4 +17,3 @@ class Request:
 
     def _get_query_string(self, environ: dict) -> dict:
         return {}
-

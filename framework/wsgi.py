@@ -1,4 +1,3 @@
-from pprint import pprint
 from request import Request
 
 

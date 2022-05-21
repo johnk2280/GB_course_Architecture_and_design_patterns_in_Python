@@ -18,3 +18,6 @@ def _load_config(path: pathlib.Path) -> Dict:
 
 CONFIG = _load_config(CONFIGS_DIR.joinpath('config.yaml'))
 LOGGER_CONFIG = _load_config(CONFIGS_DIR.joinpath('logger_config.yaml'))
+
+DEFAULT_ADDRESS = CONFIG['SERVER']['defaults']['ip']
+DEFAULT_PORT = CONFIG['SERVER']['defaults']['port']
