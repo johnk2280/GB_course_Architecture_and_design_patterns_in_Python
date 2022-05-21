@@ -3,53 +3,78 @@ import os
 import signal
 import subprocess
 import sys
+from typing import List
+
+from logger import LOGGER
+from settings import DEFAULT_ADDRESS
+from settings import DEFAULT_PORT
 
 METHODS = {
     'runserver': ['python3', 'server.py'],
 }
 
 
-def parse_commandline() -> None:
-    parser = argparse.ArgumentParser(
-        description='Framework manager',
-    )
-    parser.add_argument(
-        'method',
-        type=str,
-        help='method',
-    )
-    parser.add_argument(
-        '-p',
-        '--port',
-        type=str,
-        default='8000',
-        help='port: default - 8000',
-    )
-
+def get_command(method: str) -> List[str]:
     try:
-        args = parser.parse_args()
-        if int(args.port) < 1024 or int(args.port) > 65535:
-            raise ValueError
-
-        print(args)
-        cmd = METHODS[args.method] + [args.port]
-        # sp = subprocess.Popen(
-        #     cmd,
-        #     stdout=subprocess.PIPE,
-        #     shell=True,
-        #     preexec_fn=os.setsid,
-        # )
-        # os.killpg(os.getpgid(sp.pid), signal.SIGTERM)
+        return METHODS[method]
     except KeyError:
-        print('This method is not available.')
+        raise
+
+
+def parse_command_line() -> None:
+
+    # TODO: реализовать через argparse
+
+    addr = DEFAULT_ADDRESS
+    prt = DEFAULT_PORT
+    args = sys.argv
+    try:
+        method = args[1]
+        cmd = get_command(method)
+    except IndexError:
+        LOGGER.info('Необходимо указать метод и (опционально) его аргументы.')
         sys.exit(-1)
-    except ValueError:
-        print(
-            'Only a number can be specified as a port.\n'
-            'Port number must be in the range of numbers [1024 : 65535].'
-        )
+    except KeyError:
+        LOGGER.info('Указанный метод отсутствует.')
         sys.exit(-1)
+
+    if '-a' in args:
+        try:
+            addr = args[args.index('-a') + 1]
+        except IndexError:
+            LOGGER.info(
+                'После параметра \'a\'- необходимо указать адрес, '
+                'который будет слушать сервер.',
+            )
+            sys.exit(-1)
+
+    cmd += ['-a', addr]
+    if '-p' in args:
+        try:
+            prt = int(args[args.index('-p') + 1])
+            if prt < 1024 or prt > 65535:
+                raise ValueError
+        except IndexError:
+            LOGGER.info(
+                'После параметра -\'p\' необходимо указать номер порта.',
+            )
+            sys.exit(-1)
+        except ValueError:
+            LOGGER.info(
+                'В качестве порта может быть указано только число в диапазоне'
+                ' от 1024 до 65535.',
+            )
+            sys.exit(-1)
+
+    cmd += ['-p', str(prt)]
+    try:
+        process = subprocess.Popen(cmd)
+        process.wait()
+    except KeyboardInterrupt:
+        sys.exit(-1)
+
+    return
 
 
 if __name__ == '__main__':
-    parse_commandline()
+    parse_command_line()

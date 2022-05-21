@@ -17,9 +17,9 @@ class Server:
     address: str
     port: int
 
-    def __init__(self, address, port):
-        self.address = address
-        self.port = port
+    def __init__(self, addr, prt):
+        self.address = addr
+        self.port = prt
 
         self.sock = socket(AF_INET, SOCK_STREAM)
         self.sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
@@ -42,8 +42,8 @@ class Server:
         )
         try:
             while True:
-                client, address = self.sock.accept()
-                data = client.recv(1024).decode()
+                client, addr = self.sock.accept()
+                data = client.recv(2048).decode()
                 self.logger.info('Получены данные:\n%s', data)
                 response = b'Hello from server'
                 client.sendall(response)
@@ -53,13 +53,16 @@ class Server:
             sys.exit(-1)
 
 
-def parse_command_line() -> Tuple:
-    address = DEFAULT_ADDRESS
-    port = DEFAULT_PORT
-    command_args = sys.argv
-    if '-a' in command_args:
+def parse_command_line() -> Tuple[str, int]:
+
+    # TODO: реализовать через argparse
+
+    addr = DEFAULT_ADDRESS
+    prt = DEFAULT_PORT
+    args = sys.argv
+    if '-a' in args:
         try:
-            address = command_args[command_args.index('-a') + 1]
+            addr = args[args.index('-a') + 1]
         except IndexError:
             LOGGER.info(
                 'После параметра \'a\'- необходимо указать адрес, '
@@ -67,10 +70,10 @@ def parse_command_line() -> Tuple:
             )
             sys.exit(-1)
 
-    if '-p' in command_args:
+    if '-p' in args:
         try:
-            port = int(command_args[command_args.index('-p') + 1])
-            if port < 1024 or port > 65535:
+            prt = int(args[args.index('-p') + 1])
+            if prt < 1024 or prt > 65535:
                 raise ValueError
         except IndexError:
             LOGGER.info(
@@ -84,14 +87,10 @@ def parse_command_line() -> Tuple:
             )
             sys.exit(-1)
 
-    return address, port
-
-
-def main() -> None:
-    address, port = parse_command_line()
-    server = Server(address, port)
-    server.run()
+    return addr, prt
 
 
 if __name__ == '__main__':
-    main()
+    address, port = parse_command_line()
+    server = Server(address, port)
+    server.run()

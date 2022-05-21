@@ -16,7 +16,7 @@ stream_handler = logging.StreamHandler(sys.stdout)
 stream_handler.setFormatter(app_formatter)
 stream_handler.setLevel(logging.DEBUG)
 log_file = logging.handlers.RotatingFileHandler(
-    BASE_DIR.joinpath('logs', 'server.log'),
+    BASE_DIR.joinpath('logs', 'johnk_framework.log'),
     encoding='utf-8',
     maxBytes=1048576,
     backupCount=6,
@@ -24,7 +24,7 @@ log_file = logging.handlers.RotatingFileHandler(
 log_file.setFormatter(app_formatter)
 log_file.setLevel(logging.DEBUG)
 
-LOGGER = logging.getLogger('server')
+LOGGER = logging.getLogger('johnk_framework')
 LOGGER.addHandler(stream_handler)
 LOGGER.addHandler(log_file)
 LOGGER.setLevel(logging.DEBUG)
