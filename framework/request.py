@@ -2,9 +2,9 @@ class Request:
 
     def __init__(self, environ: dict):
         self.environ = environ
-        self.method = environ.get('REQUEST_METHOD')
+        self.method = environ.get('REQUEST_METHOD').lower()
         self.path = environ.get('PATH_INFO')
-        self.query_string = self._get_query_string(environ)
+        self.query_string = self._get_query_params(environ)
         self.headers = self._get_headers(environ)
 
     def _get_headers(self, environ: dict) -> dict:
@@ -15,5 +15,16 @@ class Request:
 
         return headers
 
-    def _get_query_string(self, environ: dict) -> dict:
-        return {}
+    def _get_query_params(self, environ: dict) -> dict:
+        query_params = {}
+        qs = map(
+            lambda x: x.split('='),
+            environ.get('QUERY_STRING').split('&'),
+        )
+        for param in qs:
+            if query_params.get(param[0]):
+                query_params[param[0]].append(param[-1])
+            else:
+                query_params[param[0]] = [param[-1]]
+
+        return query_params

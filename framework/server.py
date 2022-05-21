@@ -27,6 +27,7 @@ class Server:
         self.sock.listen()
 
     def get_data(self):
+        # TODO: Распарсить данные и передать на точку входа
         pass
 
     def create_response(self):
