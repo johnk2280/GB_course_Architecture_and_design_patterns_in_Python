@@ -1,11 +1,9 @@
-import argparse
-import os
-import signal
 import subprocess
 import sys
-from typing import List
+from typing import Tuple
 
 from logger import LOGGER
+
 from settings import DEFAULT_ADDRESS
 from settings import DEFAULT_PORT
 
@@ -14,23 +12,16 @@ METHODS = {
 }
 
 
-def get_command(method: str) -> List[str]:
-    try:
-        return METHODS[method]
-    except KeyError:
-        raise
-
-
-def parse_command_line() -> None:
+def get_command(args: tuple) -> Tuple[str]:
 
     # TODO: реализовать через argparse
+    # TODO: отрефакторить!
 
     addr = DEFAULT_ADDRESS
     prt = DEFAULT_PORT
-    args = sys.argv
     try:
         method = args[1]
-        cmd = get_command(method)
+        cmd = METHODS[method]
     except IndexError:
         LOGGER.info('Необходимо указать метод и (опционально) его аргументы.')
         sys.exit(-1)
@@ -67,12 +58,23 @@ def parse_command_line() -> None:
             sys.exit(-1)
 
     cmd += ['-p', str(prt)]
+    return cmd
+
+
+def process(cmd: Tuple[str]) -> None:
     try:
-        process = subprocess.Popen(cmd)
-        process.wait()
+        proc = subprocess.Popen(cmd)
+        proc.wait()
     except KeyboardInterrupt:
         sys.exit(-1)
 
+    return
+
+
+def parse_command_line() -> None:
+    args = sys.argv
+    cmd = get_command(tuple(args))
+    process(cmd)
     return
 
 
