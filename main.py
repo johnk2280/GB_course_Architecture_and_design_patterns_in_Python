@@ -7,10 +7,10 @@ from framework.response import Response
 class MyFirstView(View):
 
     def get(self, request, *args, **kwargs) -> Response:
-        return Response(status=200, body='GET SUCCESS')
+        return Response(body='GET SUCCESS')
 
     def post(self, request, *args, **kwargs) -> Response:
-        return 'Я ПОСТ запрос'
+        return Response(status='201 CREATED', body='POST SUCCESS')
 
 
 urls = [
