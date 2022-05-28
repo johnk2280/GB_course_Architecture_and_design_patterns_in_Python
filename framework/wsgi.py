@@ -10,8 +10,9 @@ class Framework:
     def __call__(self, environ, start_response):
         request = Request(environ)
         view = self._get_view(request)
-        print(self._get_response(request, view))
-        start_response('200 OK', [('Content-Type', 'text/html')])
+        response = self._get_response(request, view)
+
+        start_response(response.st, [('Content-Type', 'text/html')])
         return [b'Hello world from my first wsgi application!!!']
 
     def _get_view(self, request: Request):
@@ -26,4 +27,4 @@ class Framework:
         if hasattr(view, request.method):
             return getattr(view, request.method)(view, request)
 
-        return 'Метод не поддерживается'
+        return 'Метод не поддерживается.'

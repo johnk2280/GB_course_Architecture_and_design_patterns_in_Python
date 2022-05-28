@@ -3,7 +3,7 @@ class Response:
     def __init__(
             self,
             body: str = None,
-            status: int = 200,
+            status: str = '200 OK',
             headers: dict = None
     ):
         self.status = status

@@ -4,12 +4,14 @@ from socket import SOCK_STREAM
 from socket import SOL_SOCKET
 from socket import SO_REUSEADDR
 from socket import socket
-from typing import Tuple
+from typing import Tuple, List
 
 from logger import LOGGER
 
 from settings import DEFAULT_ADDRESS
 from settings import DEFAULT_PORT
+
+from server_request import Request
 
 
 class Server:
@@ -30,6 +32,28 @@ class Server:
         # TODO: Распарсить данные и передать на точку входа
         pass
 
+    def _parse_request(self, request_str: str) -> Request:
+        request_data = request_str.split('\r\n')
+        method, route, version = self._parse_request_line(request_data[0])
+        headers = self._parse_headers(request_data[1:])
+        return Request(method, route, version, headers)
+
+    def _parse_request_line(self, rl: str) -> Tuple[str, str, str]:
+        method, route, version = rl.split(' ')
+        return method, route, version
+
+    def _parse_query_string(self, route: str) -> dict:
+        pass
+
+    def _parse_headers(self, request_headers: List) -> dict:
+        headers = {
+            el[0]: el[1] for el in map(
+                lambda x: x.split(': '),
+                request_headers,
+            ) if len(el) > 1
+        }
+        return headers
+
     def create_response(self):
         pass
 
@@ -45,7 +69,8 @@ class Server:
             while True:
                 client, addr = self.sock.accept()
                 data = client.recv(2048).decode()
-                self.logger.info('Получены данные:\n%s', data)
+                request = self._parse_request(data)
+                self.logger.info('[%s] - %s ', request.method, request.route)
                 response = b'Hello from server'
                 client.sendall(response)
                 client.close()
