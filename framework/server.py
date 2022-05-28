@@ -11,7 +11,9 @@ from logger import LOGGER
 from settings import DEFAULT_ADDRESS
 from settings import DEFAULT_PORT
 
-from server_request import Request
+from server.server_request import Request
+
+from main import app
 
 
 class Server:
@@ -22,6 +24,7 @@ class Server:
     def __init__(self, addr, prt, app):
         self.address = addr
         self.port = prt
+        self.application = app
 
         self.sock = socket(AF_INET, SOCK_STREAM)
         self.sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
@@ -47,14 +50,14 @@ class Server:
 
     def _parse_headers(self, request_headers: List) -> dict:
         headers = {
-            el[0]: el[1] for el in map(
+            'HTTP_' + el[0].upper(): el[1] for el in map(
                 lambda x: x.split(': '),
                 request_headers,
             ) if len(el) > 1
         }
         return headers
 
-    def create_response(self):
+    def create_response(self, status, headers):
         pass
 
     def run(self) -> None:
@@ -71,6 +74,12 @@ class Server:
                 data = client.recv(2048).decode()
                 request = self._parse_request(data)
                 self.logger.info('[%s] - %s ', request.method, request.route)
+                environ = {
+                    'REQUEST_METHOD': request.method,
+                    'PATH_INFO': request.route,
+                }
+                environ.update(request.headers)
+                self.application(environ, self.create_response)
                 response = b'Hello from server'
                 client.sendall(response)
                 client.close()
@@ -118,5 +127,5 @@ def parse_command_line() -> Tuple[str, int]:
 
 if __name__ == '__main__':
     address, port = parse_command_line()
-    server = Server(address, port)
+    server = Server(address, port, app)
     server.run()
