@@ -19,7 +19,7 @@ class Server:
     address: str
     port: int
 
-    def __init__(self, addr, prt):
+    def __init__(self, addr, prt, app):
         self.address = addr
         self.port = prt
 
