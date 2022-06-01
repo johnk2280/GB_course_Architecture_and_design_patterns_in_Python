@@ -21,10 +21,10 @@ class Server:
     address: str
     port: int
 
-    def __init__(self, addr, prt, app):
+    def __init__(self, addr, prt, application):
         self.address = addr
         self.port = prt
-        self.application = app
+        self.application = application
 
         self.sock = socket(AF_INET, SOCK_STREAM)
         self.sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
