@@ -1,6 +1,7 @@
 class Request:
 
     def __init__(self, environ: dict):
+
         self.environ = environ
         self.method = environ.get('REQUEST_METHOD').lower()
         self.path = environ.get('PATH_INFO')
@@ -17,14 +18,17 @@ class Request:
 
     def _get_query_params(self, environ: dict) -> dict:
         query_params = {}
-        qs = map(
-            lambda x: x.split('='),
-            environ.get('QUERY_STRING').split('&'),
-        )
-        for param in qs:
-            if query_params.get(param[0]):
-                query_params[param[0]].append(param[-1])
-            else:
-                query_params[param[0]] = [param[-1]]
+        try:
+            qs = map(
+                lambda x: x.split('='),
+                environ.get('QUERY_STRING').split('&'),
+            )
+            for param in qs:
+                if query_params.get(param[0]):
+                    query_params[param[0]].append(param[-1])
+                else:
+                    query_params[param[0]] = [param[-1]]
+        except (AttributeError, KeyError, TypeError):
+            pass
 
         return query_params

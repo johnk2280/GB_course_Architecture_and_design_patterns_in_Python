@@ -1,3 +1,4 @@
+from .response import Response
 from .request import Request
 from .view import View
 
@@ -12,8 +13,8 @@ class Framework:
         view = self._get_view(request)
         response = self._get_response(request, view)
 
-        start_response(response.st, [('Content-Type', 'text/html')])
-        return [b'Hello world from my first wsgi application!!!']
+        start_response(response.status, list(response.headers.items()))
+        return [response.body.encode()]
 
     def _get_view(self, request: Request):
         path = request.path
@@ -27,4 +28,4 @@ class Framework:
         if hasattr(view, request.method):
             return getattr(view, request.method)(view, request)
 
-        return 'Метод не поддерживается.'
+        return Response(status='404 NOT FOUND', body='ALLOWED METHOD NOT FOUND')

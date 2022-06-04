@@ -6,9 +6,10 @@ from logger import LOGGER
 
 from settings import DEFAULT_ADDRESS
 from settings import DEFAULT_PORT
+from settings import PATH_TO_SERVER
 
 METHODS = {
-    'runserver': ['python3', 'server.py'],
+    'runserver': ['python3', PATH_TO_SERVER.as_posix()],
 }
 
 
