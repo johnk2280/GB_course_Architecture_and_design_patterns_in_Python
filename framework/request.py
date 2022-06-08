@@ -1,7 +1,6 @@
 class Request:
 
     def __init__(self, environ: dict):
-
         self.environ = environ
         self.method = environ.get('REQUEST_METHOD').lower()
         self.path = environ.get('PATH_INFO')
