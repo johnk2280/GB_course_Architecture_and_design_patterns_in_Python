@@ -20,3 +20,5 @@ LOGGER_CONFIG = _load_config(CONFIGS_DIR.joinpath('logger_config.yaml'))
 
 DEFAULT_ADDRESS = CONFIG['SERVER']['defaults']['ip']
 DEFAULT_PORT = CONFIG['SERVER']['defaults']['port']
+
+PATH_TO_SERVER = BASE_DIR.joinpath('server.py')
