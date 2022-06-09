@@ -8,3 +8,5 @@ def render(template_name: str, **kwargs):
     return template.render(**kwargs)
 
 
+print(render('index.html', nickname='Johnk', status='learning'))
+
