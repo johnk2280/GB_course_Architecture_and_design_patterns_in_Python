@@ -1,6 +1,6 @@
 from .response import Response
 from .request import Request
-from .view import View
+from .views import View
 
 
 class Framework:
@@ -18,7 +18,9 @@ class Framework:
 
     def _get_view(self, request: Request):
         path = request.path
+        print(1, path)
         for url in self.urls:
+            print(2, url.path)
             if url.path == path:
                 return url.view
 
@@ -28,4 +30,4 @@ class Framework:
         if hasattr(view, request.method):
             return getattr(view, request.method)(view, request)
 
-        return Response(status='404 NOT FOUND', body='ALLOWED METHOD NOT FOUND')
+        return Response(status='404 NOT FOUND', body='404.html')

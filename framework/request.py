@@ -1,4 +1,7 @@
-class Request:
+from framework.abstracts.abstract_request import AbstractRequest
+
+
+class Request(AbstractRequest):
 
     def __init__(self, environ: dict):
         self.environ = environ

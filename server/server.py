@@ -11,9 +11,9 @@ from logger import LOGGER
 from settings import DEFAULT_ADDRESS
 from settings import DEFAULT_PORT
 
-from server.server_request import Request
+from server.server import Request
 
-from main import app
+from app import app
 
 
 class Server:

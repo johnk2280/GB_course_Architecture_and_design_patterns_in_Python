@@ -1,14 +1,17 @@
-class Response:
+from framework.abstracts.abstract_response import AbstractResponse
+from framework.render import render
 
+
+class Response(AbstractResponse):
     def __init__(
             self,
-            body: str = None,
             status: str = '200 OK',
-            headers: dict = None
+            headers: dict = None,
+            body: str = None,
     ):
         self.status = status
         self.headers = self._get_headers(headers)
-        self.body = body
+        self.body = render(body)
 
     def _get_headers(self, user_headers: dict) -> dict:
         headers = {
