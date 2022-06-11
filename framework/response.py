@@ -1,5 +1,5 @@
 from framework.abstracts.abstract_response import AbstractResponse
-from framework.render import render
+from framework.render import render_view
 
 
 class Response(AbstractResponse):
@@ -11,7 +11,7 @@ class Response(AbstractResponse):
     ):
         self.status = status
         self.headers = self._get_headers(headers)
-        self.body = render(body)
+        self.body = render_view(body)
 
     def _get_headers(self, user_headers: dict) -> dict:
         headers = {

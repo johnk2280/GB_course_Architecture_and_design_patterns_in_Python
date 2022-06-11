@@ -1,5 +1,5 @@
 from framework.wsgi import Framework
-from framework.urls import urlpatterns
+from framework.urls import url_mapper
 
 
-app = Framework(urlpatterns)
+app = Framework(url_mapper)
