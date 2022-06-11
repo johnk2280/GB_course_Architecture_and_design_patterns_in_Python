@@ -1,6 +1,8 @@
 from framework.abstracts.abstract_view import View
 from framework.response import Response
 
+from logger import LOGGER
+
 
 class PageNotFound404View(View):
 
@@ -26,5 +28,12 @@ class AboutView(View):
 
 
 class ContactView(View):
+
+    logger = LOGGER
+
     def get(self, request, *args, **kwargs) -> Response:
+        return Response(body='contacts.html')
+
+    def post(self, request, *args, **kwargs) -> Response:
+        self.logger.debug('Data: %s', request.body)
         return Response(body='contacts.html')

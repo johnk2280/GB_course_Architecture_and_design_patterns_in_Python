@@ -1,7 +1,14 @@
+import json
 from abc import ABC
 
 
 class AbstractRequest(ABC):
+
+    environ: dict
+    path: str
+    method: str
+    headers: dict
+    query_params: dict
 
     def _get_headers(self, environ: dict) -> dict:
         headers = {}
@@ -30,4 +37,5 @@ class AbstractRequest(ABC):
 
     def _get_body(self, environ: dict) -> dict:
         body = {}
-        return {'method': self.method, 'data': body}
+        body_str = environ['wsgi.input'].read().decode('utf-8')
+        return {'method': self.method, 'data': body_str}

@@ -18,9 +18,9 @@ class Framework:
 
     def __call__(self, environ: dict, start_response: callable):
         self.logger.info('Request received.')
-        print(*environ.items(), sep='\n')
-        print(environ['wsgi.input'].read().decode('utf-8'))
+        # print(*environ.items(), sep='\n')
         request = Request(environ)
+
         view = self._get_view(request)
         response = self._get_response(request, view)
         start_response(response.status, list(response.headers.items()))
@@ -38,6 +38,7 @@ class Framework:
 
     def _get_response(self, request: Request, view: View) -> Response:
         try:
+            self.logger.debug('%s', request.body)
             return getattr(view, request.method)(view, request)
         except AttributeError:
             self.logger.debug('Method not allowed.')
