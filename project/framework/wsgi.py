@@ -1,18 +1,25 @@
 from .response import Response
 from .request import Request
-from .views import View, PageNotFound404View, MethodNotAllowedView
+from .views import MethodNotAllowedView
+from .views import PageNotFound404View
+from .views import View
+
+from logger import LOGGER
 
 
 class Framework:
-    urls: dict
 
-    def __init__(self, urls):
+    logger = LOGGER
+
+    def __init__(self, urls: dict):
         self.urls = urls
         self._not_found_view = PageNotFound404View
         self._not_allowed_view = MethodNotAllowedView
 
     def __call__(self, environ: dict, start_response: callable):
+        self.logger.info('Request received.')
         print(*environ.items(), sep='\n')
+        print(environ['wsgi.input'].read().decode('utf-8'))
         request = Request(environ)
         view = self._get_view(request)
         response = self._get_response(request, view)
@@ -23,14 +30,17 @@ class Framework:
         try:
             return self.urls[request.path]
         except KeyError:
+            self.logger.debug('Page not found.')
             return self._not_found_view
         except AttributeError:
+            self.logger.debug('Method not allowed.')
             return self._not_allowed_view
 
-    def _get_response(self, request: Request, view: View):
+    def _get_response(self, request: Request, view: View) -> Response:
         try:
             return getattr(view, request.method)(view, request)
         except AttributeError:
-            return Response(status='405 Method Not Allowed', body='405.html')
+            self.logger.debug('Method not allowed.')
+            return self._not_allowed_view().get(request)
 
 

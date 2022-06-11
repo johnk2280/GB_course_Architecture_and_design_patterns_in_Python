@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from framework.views import View
+from project.framework.views import View
 
 
 @dataclass

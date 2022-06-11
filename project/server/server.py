@@ -6,12 +6,12 @@ from socket import SO_REUSEADDR
 from socket import socket
 from typing import Tuple, List
 
-from logger import LOGGER
+from project.logger import LOGGER
 
-from settings import DEFAULT_ADDRESS
-from settings import DEFAULT_PORT
+from project.settings import DEFAULT_ADDRESS
+from project.settings import DEFAULT_PORT
 
-from server.server import Request
+from project.server.server import Request
 
 from app import app
 

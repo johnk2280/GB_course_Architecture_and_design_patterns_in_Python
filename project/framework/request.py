@@ -1,5 +1,4 @@
 from framework.abstracts.abstract_request import AbstractRequest
-from framework.exceptions import BadRequestException
 
 
 class GetRequest(AbstractRequest):
