@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    <link rel="stylesheet" href="style.css">-->
-    <title>Contact us</title>
-</head>
+{% block title %}
+Контакты
+{% endblock %}
 
-<body>
+{% block content %}
 <div id="ContactUs">
     <h1>Contact Us</h1>
     <form action="#" method="post">
@@ -61,6 +57,4 @@
         <input type="reset" value="Reset">
     </form>
 </div>
-</body>
-
-</html>
+{% endblock %}
