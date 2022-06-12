@@ -26,13 +26,14 @@ class Framework:
 
     def _get_view(self, request: Request) -> View:
         try:
-            # self.logger.debug('request = %s', request.__dict__)
             return self.urls[request.path]
-        except KeyError:
+        except KeyError as e:
             self.logger.debug('Page not found.')
+            self.logger.exception(e)
             return self._not_found_view
-        except AttributeError:
+        except AttributeError as e:
             self.logger.debug('Method not allowed.')
+            self.logger.exception(e)
             return self._not_allowed_view
 
     def _get_response(self, request: Request, view: View) -> Response:
@@ -40,7 +41,7 @@ class Framework:
             self.logger.debug('view = %s', view)
             return getattr(view, request.method)(view, request)
         except AttributeError as e:
-            self.logger.debug('Error: %s: %s', type(e), e)
+            self.logger.exception(e)
             self.logger.debug('Method not allowed.')
             return self._not_allowed_view().get(request)
 
