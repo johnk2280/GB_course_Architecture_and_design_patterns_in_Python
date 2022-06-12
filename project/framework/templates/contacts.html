@@ -5,56 +5,89 @@
 {% endblock %}
 
 {% block content %}
+
 <div id="ContactUs">
     <h1>Contact Us</h1>
-    <form action="#" method="post">
-        <div class="form-shape">
-            <label for="query">
-                Type of Query
-            </label>
-            <select name="query" id="query">
-                <option value="select" selected>
-                    Select
-                </option>
-                <option value="order">
-                    Order related Issues
-                </option>
-                <option value="site">
-                    Site related Issues
-                </option>
-                <option value="complaint">
-                    Complaint related Issues
-                </option>
-                <option value="others">
-                    Others
-                </option>
-            </select>
+    <br>
+    <p>Select the reason for contacting</p>
+    <select class="form-select" aria-label="Default select example" name="query" id="query">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+
+    <br>
+    <p>Enter your name</p>
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
         </div>
-        <div class="form-shape">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" placeholder="Enter your Name">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
         </div>
-        <div class="form-shape">
-            <label for="email">Email-Id</label>
-            <input type="email" name="email" id="email" placeholder="Enter your email">
-        </div>
-        <div class="form-shape">
-            <label for="pho">Phone Number</label>
-            <input type="phone" name="phone" id="pho" placeholder="Enter your Phone no">
-        </div>
-        <div id="radio">
-            Are you a member of Wunderbar Shop:
-            Yes <input type="radio" name="eligible">
-            No <input type="radio" name="eligible">
-        </div>
-        <div class="form-shape">
-            <label for="message">
-                Elaborate your query
-            </label>
-            <textarea name="message" id="message" cols="30" rows="10"></textarea>
-        </div>
-        <input type="submit" value="Submit">
-        <input type="reset" value="Reset">
-    </form>
+    </div>
+
+    <br>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-secondary">Cancel</button>
+    <!--    <form action="#" method="post">-->
+    <!--        <div class="form-shape">-->
+    <!--            <label for="query">-->
+    <!--                Type of Query-->
+    <!--            </label>-->
+    <!--            <select name="query" id="query">-->
+    <!--                <option value="select" selected>-->
+    <!--                    Select-->
+    <!--                </option>-->
+    <!--                <option value="order">-->
+    <!--                    Order related Issues-->
+    <!--                </option>-->
+    <!--                <option value="site">-->
+    <!--                    Site related Issues-->
+    <!--                </option>-->
+    <!--                <option value="complaint">-->
+    <!--                    Complaint related Issues-->
+    <!--                </option>-->
+    <!--                <option value="others">-->
+    <!--                    Others-->
+    <!--                </option>-->
+    <!--            </select>-->
+    <!--        </div>-->
+    <!--        <div class="form-shape">-->
+    <!--            <label for="name">Name</label>-->
+    <!--            <input type="text" name="name" id="name" placeholder="Enter your Name">-->
+    <!--        </div>-->
+    <!--        <div class="form-shape">-->
+    <!--            <label for="email">Email-Id</label>-->
+    <!--            <input type="email" name="email" id="email" placeholder="Enter your email">-->
+    <!--        </div>-->
+    <!--        <div class="form-shape">-->
+    <!--            <label for="pho">Phone Number</label>-->
+    <!--            <input type="phone" name="phone" id="pho" placeholder="Enter your Phone no">-->
+    <!--        </div>-->
+    <!--        <div id="radio">-->
+    <!--            Are you a member of Wunderbar Shop:-->
+    <!--            Yes <input type="radio" name="eligible">-->
+    <!--            No <input type="radio" name="eligible">-->
+    <!--        </div>-->
+    <!--        <div class="form-shape">-->
+    <!--            <label for="message">-->
+    <!--                Elaborate your query-->
+    <!--            </label>-->
+    <!--            <textarea name="message" id="message" cols="30" rows="10"></textarea>-->
+    <!--        </div>-->
+    <!--        <input type="submit" value="Submit">-->
+    <!--        <input type="reset" value="Reset">-->
+    <!--    </form>-->
 </div>
+
 {% endblock %}

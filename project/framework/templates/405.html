@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
 
-    <style type=text/css>
-        h1 {
-            color: #0ecc8a;
-            font-family: Helvetica, Arial, sans-serif;
-        }
+{% block title %}
+Метод не разрешен
+{% endblock %}
 
-        p {
-            color: #0c9263;
-            font-weight: 900;
-            font-size: 20px;
-            font-family: Helvetica, Arial, sans-serif;
-        }
+{% block content %}
+<div class="row">
+    <h1>405 Method Not Allowed</h1>
 
-    </style>
-</head>
-
-<body>
-
-<h1>405 Method Not Allowed</h1>
-
-</body>
-</html>
+</div>
+{% endblock %}
