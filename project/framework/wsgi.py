@@ -1,3 +1,5 @@
+from urllib.parse import parse_qs
+
 from .response import Response
 from .request import Request
 from .views import MethodNotAllowedView
@@ -19,6 +21,8 @@ class Framework:
     def __call__(self, environ: dict, start_response: callable):
         # self.logger.info('Request received: %s', environ)
         request = Request(environ)
+        self.logger.debug(request)
+        self.logger.debug(request.query_params)
         view = self._get_view(request)
         response = self._get_response(request, view)
         start_response(response.status, list(response.headers.items()))

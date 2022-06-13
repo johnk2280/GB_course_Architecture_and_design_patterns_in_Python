@@ -23,3 +23,4 @@ DEFAULT_PORT = CONFIG['SERVER']['defaults']['port']
 
 PATH_TO_SERVER = BASE_DIR.joinpath('server.py')
 PATH_TO_TEMPLATES = BASE_DIR.joinpath('framework/templates')
+PATH_TO_DATABASE = BASE_DIR.joinpath('framework/database')

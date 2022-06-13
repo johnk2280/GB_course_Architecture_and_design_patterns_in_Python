@@ -6,40 +6,44 @@
 
 {% block content %}
 
-<div id="ContactUs">
-    <h1>Contact Us</h1>
-    <br>
-    <p>Select the reason for contacting</p>
-    <select class="form-select" aria-label="Default select example" name="query" id="query">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
+<form action="#" method="post">
+    <div id="ContactUs">
+        <h1>Свяжитесь с нами</h1>
+        <br>
 
-    <br>
-    <p>Enter your name</p>
-    <div class="row">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+        <p>Выберите тему обращения</p>
+        <select class="form-select" aria-label="Default select example" name="theme" id="query">
+            <option selected>Откройте меню выбора</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+        <br>
+        <p>Введите свое имя и фамилию</p>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Имя" aria-label="First name" name="first_name"
+                       id="first_name">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Фамилия" aria-label="Last name" name="last_name"
+                       id="last_name">
+            </div>
         </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+
+        <br>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="text" class="form-label">Текст обращения</label>
+            <textarea class="form-control" id="text" rows="3" name="text"></textarea>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Отправить">
 
-    <br>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
     </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <button type="button" class="btn btn-primary">Submit</button>
-    <button type="button" class="btn btn-secondary">Cancel</button>
-
-</div>
+</form>
 
 {% endblock %}

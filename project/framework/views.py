@@ -1,4 +1,5 @@
 from framework.abstracts.abstract_view import View
+from framework.database.writer import write_to_csv
 from framework.response import Response
 
 from logger import LOGGER
@@ -35,5 +36,6 @@ class ContactView(View):
         return Response(body='contacts.html')
 
     def post(self, request, *args, **kwargs) -> Response:
-        self.logger.debug('Data: %s', request.body)
-        return Response(body='contacts.html')
+        self.logger.debug('Data: %s', request.query_params)
+        write_to_csv(request.query_params['data'])
+        return Response(body='index.html')
