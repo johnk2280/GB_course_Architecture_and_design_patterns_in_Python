@@ -5,7 +5,7 @@ import sys
 from settings import BASE_DIR
 from settings import LOGGER_CONFIG
 
-sys.path.append('../')
+sys.path.append('/')
 
 # init formatter
 normal_format = LOGGER_CONFIG['formatters']['normal']['format']
