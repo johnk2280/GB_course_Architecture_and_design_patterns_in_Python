@@ -73,3 +73,19 @@ class CourseCategoryView(View):
 class CourseCategoryListView(ListView):
     pass
 
+
+class CreateUserView(View):
+    pass
+
+
+class CreateUserCategoryView(View):
+    pass
+
+
+class CreateCourseView(View):
+    pass
+
+
+class CreateCourseCategoryView(View):
+    pass
+
