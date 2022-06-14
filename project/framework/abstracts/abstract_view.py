@@ -20,3 +20,6 @@ class View(ABC):
     def update(self, request, *args, **kwargs) -> Response:
         return Response(status='405 Method Not Allowed', body='405.html')
 
+
+class ListView(ABC):
+    pass

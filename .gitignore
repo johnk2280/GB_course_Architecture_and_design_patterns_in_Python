@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 /framework/logs/
 /project/logs/
+/project/framework/database/user_appeal.csv

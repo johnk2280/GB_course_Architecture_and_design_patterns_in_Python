@@ -1,3 +1,4 @@
+from framework.abstracts.abstract_view import ListView
 from framework.abstracts.abstract_view import View
 from framework.database.writer import write_to_csv
 from framework.response import Response
@@ -39,3 +40,36 @@ class ContactView(View):
         self.logger.debug('Data: %s', request.query_params)
         write_to_csv(request.query_params['data'])
         return Response(body='index.html')
+
+
+class UserView(View):
+    pass
+
+
+class UserListView(ListView):
+    pass
+
+
+class UserCategoryView(View):
+    pass
+
+
+class UserCategoryListView(ListView):
+    pass
+
+
+class CourseView(View):
+    pass
+
+
+class CourseListView(ListView):
+    pass
+
+
+class CourseCategoryView(View):
+    pass
+
+
+class CourseCategoryListView(ListView):
+    pass
+

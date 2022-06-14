@@ -1,5 +1,3 @@
-from urllib.parse import parse_qs
-
 from .response import Response
 from .request import Request
 from .views import MethodNotAllowedView
