@@ -20,7 +20,7 @@ class Framework:
         # self.logger.info('Request received: %s', environ)
         request = Request(environ)
         self.logger.debug(request)
-        self.logger.debug(request.query_params)
+        # self.logger.debug(request.query_params)
         view = self._get_view(request)
         response = self._get_response(request, view)
         start_response(response.status, list(response.headers.items()))
