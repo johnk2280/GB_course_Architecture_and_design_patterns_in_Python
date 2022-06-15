@@ -5,7 +5,24 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    Hello from johnk_framework!!!
-</div>
+<form method="post">
+    <h2>Добавить курс</h2>
+    <select class="form-select" aria-label="Выбор категории курса">
+        <option selected>Выберите вид курса</option>
+        <option value="1">Онлайн</option>
+        <option value="2">Вебинар</option>
+        <option value="3">Видео</option>
+    </select>
+    <br>
+    <p>Введите название курса</p>
+    <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Название курса" aria-label="Course name" name="course_name"
+                       id="course_name">
+            </div>
+        </div>
+    <br>
+
+    <input class="btn btn-primary" type="submit" value="Создать">
+</form>
 {% endblock %}

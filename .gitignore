@@ -130,3 +130,5 @@ dmypy.json
 /framework/logs/
 /project/logs/
 /project/framework/database/user_appeal.csv
+/project/framework/database/courses.csv
+/project/framework/database/users.csv

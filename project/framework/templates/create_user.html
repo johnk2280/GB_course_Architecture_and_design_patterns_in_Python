@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}
+Создать курс
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <div id="CreateUser">
+        <h2>Добавить пользователя</h2>
+        <select class="form-select" aria-label="Выбор роли пользователя" name="user_role" id="user_role">
+            <option selected>Выберите роль пользователя</option>
+            <option value="1">Студент</option>
+            <option value="2">Преподаватель</option>
+            <option value="3">Администратор</option>
+        </select>
+        <br>
+        <p>Введите имя и фамилию пользователя</p>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Имя" aria-label="First name" name="first_name"
+                       id="first_name">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Фамилия" aria-label="Last name" name="last_name"
+                       id="last_name">
+            </div>
+        </div>
+        <br>
+        <p>Укажите электронную почту пользователя</p>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Создать">
+    </div>
+</form>
+{% endblock %}

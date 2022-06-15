@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}
+Создать курс
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <h2>Добавить категорию курсов</h2>
+    <br>
+    <p>Введите название категории</p>
+    <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Название категории" aria-label="Category name" name="category_name"
+                       id="category_name">
+            </div>
+        </div>
+    <br>
+
+    <input class="btn btn-primary" type="submit" value="Создать">
+</form>
+{% endblock %}

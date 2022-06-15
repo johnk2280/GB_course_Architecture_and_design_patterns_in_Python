@@ -1,9 +1,12 @@
 from abc import ABC
 
 from framework.response import Response
+from logger import LOGGER
 
 
 class View(ABC):
+
+    logger = LOGGER
 
     def get(self, request, *args, **kwargs) -> Response:
         return Response(status='405 Method Not Allowed', body='405.html')

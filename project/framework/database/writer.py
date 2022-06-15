@@ -7,11 +7,12 @@ from settings import PATH_TO_DATABASE
 def write_to_csv(
         data: dict,
         path: Path = PATH_TO_DATABASE,
+        mode: str = 'a',
         file_name: str = 'user_appeal',
 
 ) -> None:
     try:
-        with open(path.joinpath(f'{file_name}.csv'), 'a', encoding='utf-8') as f:
+        with open(path.joinpath(f'{file_name}.csv'), mode, encoding='utf-8') as f:
             order = ['theme', 'first_name', 'last_name', 'email', 'text']
             writer = csv.DictWriter(f, fieldnames=order)
             writer.writerow({

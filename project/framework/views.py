@@ -31,8 +31,6 @@ class AboutView(View):
 
 class ContactView(View):
 
-    logger = LOGGER
-
     def get(self, request, *args, **kwargs) -> Response:
         return Response(body='contacts.html')
 
@@ -75,17 +73,45 @@ class CourseCategoryListView(ListView):
 
 
 class CreateUserView(View):
-    pass
+
+    def get(self, request, *args, **kwargs) -> Response:
+        return Response(body='create_user.html')
+
+    def post(self, request, *args, **kwargs) -> Response:
+        self.logger.debug('Data: %s', request.query_params)
+        write_to_csv(request.query_params['data'], file_name='users')
+        return Response(body='create_user.html')
 
 
 class CreateUserCategoryView(View):
-    pass
+
+    def get(self, request, *args, **kwargs) -> Response:
+        return Response(body='create_user_category.html')
+
+    def post(self, request, *args, **kwargs) -> Response:
+        self.logger.debug('Data: %s', request.query_params)
+        write_to_csv(request.query_params['data'], file_name='user_category')
+        return Response(body='create_user_category.html')
 
 
 class CreateCourseView(View):
-    pass
+
+    def get(self, request, *args, **kwargs) -> Response:
+        return Response(body='create_course.html')
+
+    def post(self, request, *args, **kwargs) -> Response:
+        self.logger.debug('Data: %s', request.query_params)
+        write_to_csv(request.query_params['data'], file_name='courses')
+        return Response(body='create_course.html')
 
 
 class CreateCourseCategoryView(View):
-    pass
+
+    def get(self, request, *args, **kwargs) -> Response:
+        return Response(body='create_course_category.html')
+
+    def post(self, request, *args, **kwargs) -> Response:
+        self.logger.debug('Data: %s', request.query_params)
+        write_to_csv(request.query_params['data'], file_name='course_category')
+        return Response(body='create_course_category.html')
 
