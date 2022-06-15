@@ -1,5 +1,6 @@
 from abc import ABC
 
+from framework.abstracts.abstract_model import Model
 from framework.response import Response
 from logger import LOGGER
 
@@ -25,4 +26,7 @@ class View(ABC):
 
 
 class ListView(ABC):
-    pass
+    model: Model = None
+
+    def get_queryset(self):
+        return self.model.get_all()

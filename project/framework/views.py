@@ -1,5 +1,6 @@
 from framework.abstracts.abstract_view import ListView
 from framework.abstracts.abstract_view import View
+from framework.database.models import User
 from framework.database.writer import write_to_csv
 from framework.response import Response
 
@@ -45,7 +46,7 @@ class UserView(View):
 
 
 class UserListView(ListView):
-    pass
+    model = User
 
 
 class UserCategoryView(View):
