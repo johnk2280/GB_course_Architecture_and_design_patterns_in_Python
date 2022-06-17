@@ -15,3 +15,12 @@ class UserCategory(Model):
 
 class CourseCategory(Model):
     pass
+
+
+MODEL_MAPPER = {
+    'user': User,
+    'course': Course,
+    'user_category': UserCategory,
+    'course_category': CourseCategory,
+}
+
